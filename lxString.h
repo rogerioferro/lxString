@@ -203,8 +203,8 @@ namespace lx
     std::vector<string> split(string_type delimiters)
     {
       std::vector<string> result;
-      size_t current;
-      size_t next = -1;
+      size_type current;
+      size_type next = -1;
       do
       {
         current = next + 1;
