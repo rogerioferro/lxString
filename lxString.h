@@ -143,7 +143,12 @@ namespace lx
      *  @param  __s  Another string with the subject to search for.
      *  @return  The new string.
      */
-    string after(string s) const { return skip(find(s) + s.size()); }
+    string after(string s) const 
+    { 
+        auto pos = find(s);
+        if( pos == npos ) return string();
+        return substr(pos + s.size()); 
+    }
     /**
      *  @brief  Gets all the characters before the first occurrence of @a __s .
      *  @param  __s  Another string with the subject to search for.
@@ -155,7 +160,7 @@ namespace lx
      *  @param  __n  Number of characters to skip.
      *  @return  The new string.
      */
-    string skip(size_t n) const { return substr(n); }
+    string skip(size_t n) const { return substr(std::min(n,size())); }
     /**
      *  @brief  Gets the firsts @a __n characters.
      *  @param  __n  Number of characters to take.
@@ -236,27 +241,27 @@ namespace lx
      *  @brief  Parses string interpreting its content as an integral number 
      *  of the specified base, which is returned as an int value.
      */
-    int toInt(int base = 10) const { return std::stoi(*this, 0, base); }
+    int toInt(int base = 10) const { return std::stoi(*this, nullptr, base); }
     /**
      *  @brief  Parses string interpreting its content as an integral number 
      *  of the specified base, which is returned as an long int value.
      */
-    long toLong(int base = 10) const { return std::stol(*this, 0, base); }
+    long toLong(int base = 10) const { return std::stol(*this, nullptr, base); }
     /**
      *  @brief  Parses string interpreting its content as an integral number 
      *  of the specified base, which is returned as an long long int value.
      */
-    long long toLongLong(int base = 10) const { return std::stoll(*this, 0, base); }
+    long long toLongLong(int base = 10) const { return std::stoll(*this, nullptr, base); }
     /**
      *  @brief  Parses string interpreting its content as an integral number 
      *  of the specified base, which is returned as an unsigned long int value.
      */
-    unsigned long toULong(int base = 10) const { return std::stoul(*this, 0, base); }
+    unsigned long toULong(int base = 10) const { return std::stoul(*this, nullptr, base); }
     /**
      *  @brief  Parses string interpreting its content as an integral number 
      *  of the specified base, which is returned as an unsigned long long int value.
      */
-    unsigned long long toULongLong(int base = 10) const { return std::stoull(*this, 0, base); }
+    unsigned long long toULongLong(int base = 10) const { return std::stoull(*this, nullptr, base); }
     /**
      *  @brief  Parses str interpreting its content as a floating-point number, 
      *  which is returned as a value of type float.
